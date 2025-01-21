@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { slideUpVariants, zoomInVariants } from "@/sections/animation";
 
-import { allservices } from "@/lib/exports";
+import { allservices, managementPrimses } from "@/lib/exports";
 import Image from "next/image";
 
 const ServicesPage = () => {
@@ -18,19 +18,62 @@ const ServicesPage = () => {
             >
                 <motion.h1
                     variants={slideUpVariants}
-                    className="text-yellow-500 text-2xl uppercase"
-                >
-                    Special Offer
-                </motion.h1>
-                <motion.h1
-                    variants={slideUpVariants}
                     className="text-black uppercase text-[40px] font-bold text-center"
                 >
-                    Our best services
+                    Who We Are
+                </motion.h1>
+                <motion.h3
+                    variants={slideUpVariants}
+                    className="text-black uppercase text-[24px] font-bold text-center"
+                >
+                    Energy And Experience – The Best Of Both Worlds
+                </motion.h3>
+                <motion.div
+                    variants={slideUpVariants}
+                    className="px-12 lg:px-36 xl:px-48 text-[18px] text-gray-500 text-center"
+                >
+                    Established in 2006, we see ourselves as wise heads on young
+                    shoulders, with many of our key team members serving the
+                    construction industry for more than 25 years. GLOBAL GATE
+                    offers a team that not only has outstanding technical
+                    skills, but also one with the professionalism and management
+                    experience expected of a leading construction management
+                    company.
+                </motion.div>
+                <motion.div
+                    variants={slideUpVariants}
+                    className="w-96 h-1 mt-6 bg-secondary"
+                ></motion.div>
+                 <motion.div
+                    variants={zoomInVariants}
+                    initial="hidden"
+                    whileInView={"visible"}
+                    className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-start gap-[20px]"
+                >
+                    {managementPrimses.map((statement, index) => (
+                        <motion.div
+                            variants={zoomInVariants}
+                            className="flex justify-center items-start gap-5 lg:ml-24 p-8"
+                            key={index}
+                        >
+                            <div className="flex flex-col justify-center items-start gap-3">
+                                <h1 className="text-3xl font-bold text-black">
+                                    {statement.title}
+                                </h1>
+                                <p className="text-[18px] text-justify">{statement.description}</p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+                 <motion.h1
+                    variants={slideUpVariants}
+                    className="text-secondary text-3xl uppercase font-bold tracking-widest "
+                >
+                    Our Services
                 </motion.h1>
                 <motion.div
                     variants={slideUpVariants}
-                    className="w-[120px] h-[6px] bg-yellow-500"
+                    className="w-96 h-1 mt-6 bg-secondary"
                 ></motion.div>
                 <motion.div
                     variants={zoomInVariants}

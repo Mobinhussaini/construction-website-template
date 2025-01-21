@@ -3,6 +3,9 @@ import React from "react";
 
 import { motion } from "framer-motion";
 import { slideUpVariants, zoomInVariants } from "@/sections/animation";
+import { FaLocationDot } from "react-icons/fa6";
+import { BiPhoneCall } from "react-icons/bi";
+import { MdEmail } from "react-icons/md";
 
 const ContacPage = () => {
     return (
@@ -31,10 +34,49 @@ const ContacPage = () => {
                     </motion.h1>
                     <div className="w-[120px] h-[6px] bg-yellow-500"></div>
                     <p className="text-3xl italic text-gray-699 text-justify mt-[60px]">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Alias omnis accusamus veritatis sint, repellat
-                        quidem?
+                        For any inquiry, quotation, or suggestion, please write
+                        to us using below form:
                     </p>
+                    <motion.div className="flex flex-row justify-between items-center gap-3">
+                        <motion.h1
+                            variants={slideUpVariants}
+                            className="text-black flex flex-row justify-between items-center gap-1 text-base font-bold"
+                        >
+                            <FaLocationDot />
+                            Address:
+                        </motion.h1>
+                        <motion.p className="text-base font-semibold">
+                            US Address: 9405 B Lee HWY Fairfax, Fairfax VA 22031
+                            United States
+                        </motion.p>
+                    </motion.div>
+                    <motion.div className="flex flex-row justify-between items-center gap-3 ">
+                        <motion.h1
+                            variants={slideUpVariants}
+                            className="text-black flex flex-row justify-between items-center gap-1 text-base font-bold"
+                        >
+                            <BiPhoneCall />
+                            Phone:
+                        </motion.h1>
+                        <motion.p className="text-base font-semibold">
+                            US Contact No. 1-571-398-7100 , 1-571- 376-3633
+                        </motion.p>
+                    </motion.div>
+                    <motion.div className="flex flex-row justify-between items-center gap-3">
+                        <motion.h1
+                            variants={slideUpVariants}
+                            className="text-black flex flex-row justify-between items-center gap-1 text-base font-bold"
+                        >
+                            <MdEmail />
+                            Email:
+                        </motion.h1>
+                        <motion.p className="text-base font-semibold hover:text-blue-600 hover:underline hover:cursor-pointer">
+                            info@globalgategroup.org 
+                        </motion.p>
+                        <motion.p className="text-base font-semibold hover:text-blue-600 hover:underline hover:cursor-pointer">
+                            bod@globalgategroup.org
+                        </motion.p>
+                    </motion.div>
                 </motion.div>
                 <motion.div
                     initial="hidden"

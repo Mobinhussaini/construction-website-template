@@ -17,22 +17,17 @@ const HeroPage = () => {
                 className="lg:w-[60%] w-full flex flex-col justify-center items-start lg:gap-8 gap-4"
             >
                 <motion.h1
-                    variants={slideUpVariants}
-                    className="text-yellow-500 text-2xl uppercase"
-                >
-                    we are builders
-                </motion.h1>
-                <motion.h1
                     className="text-white uppercase text-[50px] font-bold"
                     variants={slideUpVariants}
                 >
-                    we will build your dream
+                    Making a positive difference
                 </motion.h1>
-                <div className="w-[120px] h-[6px] bg-yellow-500"></div>
+                <div className="w-[120px] h-[6px] bg-secondary"></div>
                 <p className="text-white text-[20px]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magnam quasi mollitia minus nobis dolorum quo possimus!
-                    Recusandae voluptatum,
+                    Our primary objective is to "Make a positive difference". We recognize that this can only be achieved through the best people, using leading methodologies and systems to deliver the highest quality of build results. 
+                </p>
+                <p className="text-white text-[20px]">
+                    It is this balance of great people, sound planning and time-proven process that enables Global Gate to deliver on our promises to our clients, staff and industry partners.  
                 </p>
                 <motion.div
                     initial="hidden"

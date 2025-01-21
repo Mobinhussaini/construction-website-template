@@ -7,19 +7,21 @@ import WorkingPage from "@/app/working/page";
 import TestimonialsPage from "@/app/testimonials/page";
 import ContactPage from "@/app/contact/page";
 import FooterPage from "@/app/footer/page";
+import BannerSection from "@/components/banner-section";
 
 export default function Home() {
     return (
         <>
-            <HeaderPage /> 
-            <HeroPage /> 
-            <AboutPage /> 
+            <BannerSection />
+            <HeaderPage />
+            <HeroPage />
+            <AboutPage />
             <ServicesPage />
-            <PortfolioPage /> 
-            <WorkingPage /> 
+            <PortfolioPage />
+            <WorkingPage />
             <TestimonialsPage />
-            <ContactPage /> 
-            <FooterPage />  
+            <ContactPage />
+            <FooterPage />
         </>
     );
 }
