@@ -5,6 +5,7 @@ import { zoomInVariants, slideUpVariants } from "@/sections/animation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { projects } from "@/lib/exports"; // Replace with your actual project data source
+import Link from "next/link";
 
 const LatestProjects = () => {
     return (
@@ -55,13 +56,14 @@ const LatestProjects = () => {
                     ))}
                 </div>
             </div>
-            <button
-                variants={zoomInVariants}
-                className="mt-12 lg:mt-24 bg-secondary hover:bg-red-800 text-xl w-1/2 lg:w-1/3 rounded-md py-3 text-white"
-                onClick={() => handleReadMore(project.id)}
-            >
-                View All Projects
-            </button>
+            <div className="mt-12">
+                <Link
+                    className="mt-12 lg:mt-24 bg-secondary hover:bg-red-800 text-xl px-24 rounded-md py-3 text-white"
+                    href={"/projects"}
+                >
+                    View All Projects
+                </Link>
+            </div>
         </div>
     );
 };

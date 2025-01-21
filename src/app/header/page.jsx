@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 import { FaXmark, FaBars } from "react-icons/fa6";
@@ -7,6 +8,7 @@ import { Link } from "react-scroll";
 
 const HeaderPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const router = useRouter();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -17,12 +19,16 @@ const HeaderPage = () => {
     };
 
     const navItem = [
-        { link: "Home", path: "home" },
-        { link: "Who we are", path: "about" },
-        { link: "What we do", path: "services" },
-        { link: "Projects", path: "projects" },
-        { link: "Contact", path: "contact" },
+        { link: "Home", path: "home", href: "/" },
+        { link: "Who we are", path: "about", href: "/who-we-are" },
+        { link: "What we do", path: "services", href: "/what-we-do" },
+        { link: "Projects", path: "projects", href: "/projects" },
+        { link: "Contact", path: "contact", href: "/contact" },
     ];
+
+    const handleClick = (href) => {
+        router.push(href);
+    };
 
     return (
         <nav className="w-full flex bg-white justify-between items-center gap-1 lg:px-16 px-6 py-4 sticky -top-1 z-50 shadow-md ">
@@ -30,17 +36,17 @@ const HeaderPage = () => {
                 Prime <span className="text-secondary italic">Structure</span>
             </h1> */}
             <Link href="/">
-            <Image
-                src={"/global/logo.png"}
-                alt="logo"
-                width={100}
-                height={100}
-                className="text-black md:text-4xl text-3xl font-bold font-rubik ml-12 lg:ml-36"
+                <Image
+                    src={"/global/logo.png"}
+                    alt="logo"
+                    width={100}
+                    height={100}
+                    className="text-black md:text-4xl text-3xl font-bold font-rubik ml-12 lg:ml-36"
                 />
-                </Link>
+            </Link>
 
             <ul className="lg:flex justify-center items-center gap-6 hidden">
-                {navItem.map(({ link, path }) => (
+                {navItem.map(({ link, path, href }) => (
                     <Link
                         key={path}
                         className="text-black  uppercase font-semibold cursor-pointer p-3 rounded-full hover:border-b hover:border-secondary text-[14px] tracking-wider"
@@ -49,6 +55,7 @@ const HeaderPage = () => {
                         offset={-100}
                         smooth={true}
                         duration={500}
+                        onClick={() => handleClick(href)}
                     >
                         {link}
                     </Link>
