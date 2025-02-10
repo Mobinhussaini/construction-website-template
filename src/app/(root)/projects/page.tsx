@@ -1,157 +1,185 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { pastProjects } from "@/lib/exports";
+import { useRouter } from "next/navigation";
+import { constructionProjects, designProjects } from "@/lib/exports";
 
-const ITEMS_PER_PAGE = 10; // Number of projects per page
-
-const PastProjects: React.FC = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const totalPages = Math.ceil(pastProjects.length / ITEMS_PER_PAGE);
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const currentProjects = pastProjects.slice(
-        startIndex,
-        startIndex + ITEMS_PER_PAGE
-    );
-
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    return (
-        <div className="font-sans py-6 px-12 lg:pb-24">
-            <div className="mx-auto px-4">
-                <div className="text-center lg:mb-10">
-                    <h2 className="text-4xl xl:text-5xl uppercase text-gray-800  font-extrabold tracking-wide">
-                        Latest Projects
-                    </h2>
-                    <p className="text-gray-500  mt-3 text-xl max-w-2xl mx-auto">
-                        Explore our latest projects, where creativity meets
-                        innovation.
-                    </p>
-                </div>
-                <div className="grid gap-1">
-                    {currentProjects.map((project, index) => (
-                        <div
-                            key={index + startIndex}
-                            className={`flex flex-col  justify-center lg:flex-row items-center  ${
-                                (index + startIndex) % 2 === 0
-                                    ? "md:flex-row bg-white"
-                                    : "md:flex-row-reverse bg-gray-100"
-                            } p-6 rounded-lg shadow-lg`}
-                        >
-                            {/* Image Carousel */}
-                            <div className="lg:w-1/3 md:w-1/2 min-h-[420px] relative">
-                                <ImageCarousel
-                                    images={project.images}
-                                    title={project.title}
-                                />
-                            </div>
-                            {/* Content Section */}
-                            <div className="lg:w-1/3 md:w-1/2 md:px-8 -mt-60 md:-mt-10">
-                                <h3 className="text-gray-800  text-xl lg:text-2xl font-bold mb-4">
-                                    {project.title}
-                                </h3>
-                                <p className="text-gray-800  text-sm lg:text-base">
-                                    {project.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                {/* Pagination Controls */}
-                {totalPages > 1 && (
-                    <div className="flex justify-center items-center mt-8 space-x-2">
-                        {Array.from({ length: totalPages }).map(
-                            (_, pageIndex) => (
-                                <button
-                                    key={pageIndex}
-                                    onClick={() =>
-                                        handlePageChange(pageIndex + 1)
-                                    }
-                                    className={`px-4 py-2 rounded-md border ${
-                                        currentPage === pageIndex + 1
-                                            ? "bg-gray-800 text-white"
-                                            : "bg-white text-gray-800  border-gray-300"
-                                    } hover:bg-gray-600 hover:text-white transition`}
-                                >
-                                    {pageIndex + 1}
-                                </button>
-                            )
-                        )}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
+type Project = {
+    id: number;
+    title: string;
+    description: string;
+    Contract: string;
+    Client: string;
+    YearOfAccomplishment: string;
+    images: string[];
 };
 
-// Image Carousel Component
-const ImageCarousel: React.FC<{ images: string[]; title: string }> = ({
-    images,
-    title,
-}) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
+const PastProjects: React.FC = () => {
+    const [activeProject, setActiveProject] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [currentImageIndex, setCurrentImageIndex] = useState<{
+        [key: number]: number;
+    }>({});
+    const projectsPerPage = 6;
+    const router = useRouter();
 
-    const handlePrev = () => {
-        setCurrentIndex(
-            (prevIndex) => (prevIndex - 1 + images.length) % images.length
-        );
-    };
+    const projects: Project[] =
+        activeProject === 1 ? constructionProjects : designProjects;
+    const totalPages: number = Math.ceil(projects.length / projectsPerPage);
+    const paginatedProjects: Project[] = projects.slice(
+        (currentPage - 1) * projectsPerPage,
+        currentPage * projectsPerPage
+    );
 
-    const handleThumbnailClick = (index: number) => {
-        setCurrentIndex(index);
+    const handleNextImage = (projectId: number, images: string[]) => {
+        setCurrentImageIndex((prev) => ({
+            ...prev,
+            [projectId]: ((prev[projectId] || 0) + 1) % images.length,
+        }));
     };
 
     return (
-        <div className="relative">
-            {/* Main Carousel Image */}
-            <Image
-                width={1200}
-                height={720}
-                alt={title}
-                src={images[currentIndex]}
-                className="w-full object-contain rounded-md shadow-[0_14px_40px_-11px_rgba(93,96,127,0.2)]"
-            />
-            {/* Navigation Buttons */}
-            <button
-                onClick={handlePrev}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black px-2 py-[2px] rounded-full shadow hover:bg-gray-600 hover:text-white"
-            >
-                &lt;
-            </button>
-            <button
-                onClick={handleNext}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black px-2 py-[2px] rounded-full shadow hover:bg-gray-600 hover:text-white"
-            >
-                &gt;
-            </button>
-            {/* Thumbnails */}
-            <div className="flex justify-center items-center gap-2 mt-4">
-                {images.map((img, index) => (
-                    <div
-                        key={index}
-                        onClick={() => handleThumbnailClick(index)}
-                        className={`cursor-pointer  rounded-md ${
-                            index === currentIndex
-                                ? "border-gray-300"
-                                : "border-transparent"
-                        }`}
-                    >
-                        <Image
-                            width={100}
-                            height={60}
-                            alt={`${title} thumbnail ${index + 1}`}
-                            src={img}
-                            className="w-20 h-12 object-cover rounded-md"
-                        />
+        <div className="font-sans py-6 px-4 sm:px-6 lg:px-8 xl:px-12 lg:pb-24">
+            <div className="mx-auto max-w-7xl">
+                <div className="text-center mb-8 lg:mb-12">
+                    <h2 className="text-3xl sm:text-4xl xl:text-5xl uppercase text-gray-800 font-extrabold tracking-tight">
+                        Latest Projects
+                    </h2>
+                    <div className="flex flex-row justify-between items-center">
+                        <button
+                            onClick={() => setActiveProject(1)}
+                            className={`px-12 py-2 rounded-md font-semibold transition-all ${
+                                activeProject === 1
+                                    ? "bg-red-800 text-white"
+                                    : "bg-gray-300 text-gray-700 hover:bg-gray-400"
+                            }`}
+                        >
+                            Construction Projects
+                        </button>
+                        <button
+                            onClick={() => setActiveProject(2)}
+                            className={`px-12 py-2 rounded-md font-semibold transition-all ${
+                                activeProject === 2
+                                    ? "bg-red-800 text-white"
+                                    : "bg-gray-300 text-gray-700 hover:bg-gray-400"
+                            }`}
+                        >
+                            Design Projects
+                        </button>
                     </div>
-                ))}
+                </div>
+
+                {/* Projects List */}
+                <div className="grid gap-6 md:gap-8">
+                    {paginatedProjects.map((project, index) => (
+                        <article
+                            key={project.id}
+                            className="flex flex-col bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                        >
+                            <div
+                                className={`flex flex-col ${
+                                    index % 2 === 0
+                                        ? "md:flex-row"
+                                        : "md:flex-row-reverse"
+                                }`}
+                            >
+                                {/* Image Section */}
+                                <div className="md:w-1/2 relative aspect-video md:aspect-square">
+                                    <Image
+                                        src={
+                                            project.images[
+                                                currentImageIndex[project.id] ||
+                                                    0
+                                            ]
+                                        }
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover transition-opacity duration-500"
+                                    />
+                                    <button
+                                        className="absolute top-1/2 right-4 bg-gray-800 text-white p-2 rounded-full"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleNextImage(
+                                                project.id,
+                                                project.images
+                                            );
+                                        }}
+                                    >
+                                        ▶
+                                    </button>
+                                </div>
+                                {/* Content Section */}
+                                <div className="md:w-1/2 p-6 md:p-8 lg:p-12 flex flex-col justify-center">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-secondary mb-4">
+                                        {project.title}
+                                    </h3>
+                                    <p className="text-gray-600 text-sm lg:text-lg leading-relaxed mb-3">
+                                        {project.description}
+                                    </p>
+                                    <p className="text-gray-800 text-xs lg:text-base leading-relaxed px-3 py-2 rounded-sm bg-gray-50 mb-1 hover:bg-gray-100">
+                                        <span className="font-semibold">
+                                            Contract#:{" "}
+                                        </span>
+                                        {project.Contract}
+                                    </p>
+                                    <p className="text-gray-800 text-xs lg:text-base leading-relaxed px-3 py-2 rounded-sm bg-gray-50 mb-1 hover:bg-gray-100">
+                                        <span className="font-semibold">
+                                            Client:{" "}
+                                        </span>{" "}
+                                        {project.Client}
+                                    </p>
+                                    <p className="text-gray-800 text-xs lg:text-base leading-relaxed px-3 py-2 rounded-sm bg-gray-50 mb-1 hover:bg-gray-100">
+                                        <span className="font-semibold">
+                                            Accomplishment Year:{" "}
+                                        </span>{" "}
+                                        {project.YearOfAccomplishment}
+                                    </p>
+                                    <button
+                                        className="mt-3 text-xs lg:text-base leading-relaxed px-3 py-2 rounded-sm bg-secondary capitalize text-white mb-1 hover:bg-red-500 cursor-pointer"
+                                        onClick={() =>
+                                            router.push(
+                                                `/projects/${project.id}`
+                                            )
+                                        }
+                                    >
+                                        Read more ...
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center mt-8">
+                        <button
+                            onClick={() =>
+                                setCurrentPage((prev) => Math.max(prev - 1, 1))
+                            }
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 mx-2 rounded-md bg-gray-300 hover:bg-gray-400 text-gray-700 disabled:opacity-50"
+                        >
+                            Prev
+                        </button>
+                        <span className="px-4 py-2 mx-2 text-gray-700">
+                            Page {currentPage} of {totalPages}
+                        </span>
+                        <button
+                            onClick={() =>
+                                setCurrentPage((prev) =>
+                                    Math.min(prev + 1, totalPages)
+                                )
+                            }
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 mx-2 rounded-md bg-gray-300 hover:bg-gray-400 text-gray-700 disabled:opacity-50"
+                        >
+                            Next
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
