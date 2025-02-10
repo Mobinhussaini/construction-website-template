@@ -10,7 +10,7 @@ const FooterPage = () => {
             <div className="bg-primary text-white flex justify-center items-center gap-2 p-5">
                 <FaCopyright className="fill-yellow-500 lg:size-5 size-8" />
                 <p className="text-lg text-center">
-                    Copyright 2025, Rubik Company, All Rights Reserved
+                    Copyright 2025, Global Gate Group, All Rights Reserved @ designed by Mobin Hussaini
                 </p>
             </div>
 
