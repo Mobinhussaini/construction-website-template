@@ -390,7 +390,7 @@ export const constructionProjects = [
         title: "Supply of Construction Materials to ANCOP Jalalabad, Afghanistan.",
         Contract: "W56JSL-12-P-0773",
         Client: "PHOENIX REGIONAL CONTRACTING CENTER",
-        "Year of Accomplishment ": "2013",
+        YearOfAccomplishment: "2013",
         description:
             "Transform your living space with HOMTAP Handyman Services' premium wardrobe installation. This sleek and modern setup features rich wooden panels, integrated mirrors, and polished marble flooring to add sophistication and functionality to your home. With precise craftsmanship and attention to detail, our team ensures a flawless finish that blends style and practicality. Contact us today to bring your vision to life!",
         images: ["/assets/project2.jpg"],
@@ -452,7 +452,7 @@ export const constructionProjects = [
         title: "Supply and Delivery of Construction Materials for Dashte Top",
         Contract: "W56JSL-12-P-0209",
         Client: "PHOENIX REGIONAL CONTRACTING CENTER",
-        "Year of Accomplishment ": "2013",
+        YearOfAccomplishment: "2013",
         description:
             "we provide professional signage installation services for businesses and homes, ensuring precise alignment, secure mounting, and a flawless finish for all types of signs. Let us help your brand make a bold and lasting impression.",
         images: [
@@ -466,7 +466,7 @@ export const constructionProjects = [
         title: "Supply and Delivery of Construction Materials for OQAB upgrade",
         Contract: "W56JSL-12-P-0202",
         Client: "PHOENIX REGIONAL CONTRACTING CENTER",
-        "Year of Accomplishment ": "2013",
+        YearOfAccomplishment: "2013",
         description:
             "we provide professional signage installation services for businesses and homes, ensuring precise alignment, secure mounting, and a flawless finish for all types of signs. Let us help your brand make a bold and lasting impression.",
         images: [
@@ -508,7 +508,7 @@ export const constructionProjects = [
         title: "Blanket Purchase Agreement (BPA) – Force Protection",
         Contract: "W91B4M-11-A-0019",
         Client: "USG, KRCC, Camp Eggers",
-        "Year of Accomplishment ": "2013",
+        YearOfAccomplishment: "2013",
         description:
             "we provide professional signage installation services for businesses and homes, ensuring precise alignment, secure mounting, and a flawless finish for all types of signs. Let us help your brand make a bold and lasting impression.",
         images: [
@@ -592,7 +592,7 @@ export const constructionProjects = [
         title: "Design and Construction of Chain-link Fence around Aerial Port Facility located in NKAIA",
         Contract: "W91B4M-11-C-6644",
         Client: "US Government, Kabul Regional Contracting Center, Camp Eggers",
-        "Year of Accomplishment ": "2012",
+        YearOfAccomplishment: "2012",
         description:
             "we provide professional signage installation services for businesses and homes, ensuring precise alignment, secure mounting, and a flawless finish for all types of signs. Let us help your brand make a bold and lasting impression.",
         images: [
@@ -620,7 +620,7 @@ export const constructionProjects = [
         title: "Force Protection Upgrade, FOB OQAB, Kabul International Airport, Kabul - Afghanistan",
         Contract: "W91B4M-11-P-0174",
         Client: "USG, KRCC, Camp Eggers",
-        "Year of Accomplishment ": "2012",
+        YearOfAccomplishment: "2012",
         description:
             "we provide professional signage installation services for businesses and homes, ensuring precise alignment, secure mounting, and a flawless finish for all types of signs. Let us help your brand make a bold and lasting impression.",
         images: [

@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
-import { zoomInVariants, slideUpVariants } from "@/sections/animation";
+import { slideUpVariants } from "@/sections/animation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { projects } from "@/lib/exports"; // Replace with your actual project data source
 import Link from "next/link";
 
 const LatestProjects = () => {
+
+
     return (
         <div className="px-4 lg:px-16 text-primary text-center">
             <div className="relative">

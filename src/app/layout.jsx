@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BannerSection from "@/components/banner-section";
@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
     title: {
         template:"%s | Global Gate Group Company",
         default:"Global Gate Group Company"
@@ -25,9 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+}) {
     return (
         <html lang="en">
             <body

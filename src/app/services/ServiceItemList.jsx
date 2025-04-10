@@ -7,12 +7,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const ServiceItemList = () => {
+    const router = useRouter();
 
-   const router = useRouter();
-
-      const handleServiceItemDetails = (id: string) => {
+    const handleServiceItemDetails = (id) => {
         router.push(`/services/${id}`);
-      };
+    };
 
     return (
         <div className="lg:w-[80%] w-[90%] m-auto py-[60px] flex flex-col justify-between items-center gap-[20px]">
@@ -29,15 +28,15 @@ const ServiceItemList = () => {
             <motion.div
                 variants={zoomInVariants}
                 initial="hidden"
-                whileInView={"visible"}
-                className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-start gap-[20px]  mt-[30px]"
+                whileInView="visible"
+                className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-start gap-[20px] mt-[30px]"
             >
                 {allservices.map((service, index) => (
                     <motion.div
                         variants={zoomInVariants}
                         className="flex justify-center items-start gap-5 p-8 cursor-pointer"
                         key={index}
-                        onClick={()=>handleServiceItemDetails(service.id)}
+                        onClick={() => handleServiceItemDetails(service.id)}
                     >
                         <Image
                             src={service.icon}
@@ -45,7 +44,7 @@ const ServiceItemList = () => {
                             width={120}
                             height={120}
                             className="w-24 cursor-pointer border-2 border-secondary hover:shadow-md hover:shadow-secondary rounded-lg p-2"
-                            />
+                        />
                         <div className="flex flex-col justify-center items-start gap-3">
                             <h1 className="text-xl font-bold text-black">
                                 {service.title}

@@ -2,36 +2,47 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
-import { constructionProjects, designProjects } from "@/lib/exports";
 import { BiArrowBack } from "react-icons/bi";
+import LoadingComponent from "@/components/loading";
 
-type Project = {
-    id: number;
-    title: string;
-    Contract: string;
-    Client: string;
-    YearOfAccomplishment: string;
-    description: string;
-    images: string[];
-};
-
-const ProjectDetails: React.FC = () => {
+const ProjectDetails = () => {
     const router = useRouter();
-    const { id } = useParams<{ id: string }>();
-    const [project, setProject] = useState<Project | null>(null);
-    const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-
-    console.log(id);
+    const { id } = useParams();
+    const [project, setProject] = useState(null);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useEffect(() => {
-        const allProjects = [...constructionProjects, ...designProjects];
-        const selectedProject = allProjects.find((proj) => proj.id === id);
-        if (selectedProject) {
-            setProject(selectedProject);
-        } else {
-            router.push("/404"); // Redirect if project is not found
-        }
+        fetchProjects();
     }, [id, router]);
+
+    const fetchProjects = async () => {
+        try {
+            // Fetch the project data from the API
+            const response = await fetch(`/api/projects/${id}`);
+
+            // Check if the response is ok (status code 200-299)
+            if (!response.ok) {
+                throw new Error("Failed to fetch projects");
+            }
+
+            // Parse the JSON response
+            const project = await response.json();
+
+
+            console.log("SELECTED PROJECT ", project)
+
+            if (project) {
+                // Set the project state with the selected project
+                setProject(project);
+            } else {
+                // Redirect to 404 page if the project is not found
+                router.push("/404");
+            }
+        } catch (error) {
+            console.error("Error fetching projects:", error);
+            router.push("/404"); // Optionally handle error by redirecting
+        }
+    };
 
     const handleNextImage = () => {
         if (project) {
@@ -48,12 +59,7 @@ const ProjectDetails: React.FC = () => {
         }
     };
 
-    if (!project)
-        return (
-            <p className="text-center text-gray-600">
-                Loading project details...
-            </p>
-        );
+    if (!project) return <LoadingComponent />;
 
     return (
         <div className="max-w-6xl mx-auto py-8 px-6 bg-white sm:px-6 lg:px-8">
